@@ -1,0 +1,119 @@
+// 47-A-Add_cleintToFile.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+/*write a program to ask you to enter clients and save them ot save them to file
+
+Adding New Client:
+
+‰›” «·ﬂ·«Ì‰  «·”«»ﬁ
+
+Client Added SuccessFully, do you want to add more clients?
+
+*/
+
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+using namespace std;
+const string ClientsFileName = "Clients.txt";
+
+struct sClient {
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AccountBalance;
+};
+
+sClient ReadNewClient()
+{
+	sClient Client;
+	cout << "Enter Account Number? "; // Usage of std::ws will extract allthe whitespace character 
+	getline(cin >> ws, Client.AccountNumber);
+
+	cout << "Enter PinCode? ";
+	getline(cin, Client.PinCode);
+	cout << "Enter Name? ";
+	getline(cin, Client.Name);
+	cout << "Enter Phone? ";
+	getline(cin, Client.Phone);
+	cout << "Enter AccountBalance? ";
+	cin >> Client.AccountBalance;
+
+	return Client;
+
+}
+
+
+string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
+{
+	string stClientRecord = "";
+	stClientRecord += Client.AccountNumber + Seperator;
+
+	stClientRecord += Client.PinCode + Seperator;
+	stClientRecord += Client.Name + Seperator;
+	stClientRecord += Client.Phone + Seperator;
+	stClientRecord += to_string(Client.AccountBalance);
+	return stClientRecord;
+}
+
+void AddDataLineToFile(string FileName, string stDataLine)
+{
+	fstream MyFile;
+
+	MyFile.open(FileName, ios::out || ios::app);
+	if (MyFile.is_open())
+	{
+		MyFile << stDataLine << endl;
+
+		MyFile.close();
+	}
+}
+void AddNewClient()
+{
+	sClient Client;
+	Client = ReadNewClient();
+	
+	AddDataLineToFile(ClientsFileName, ConvertRecordToLine(Client));
+
+}
+void AddClients()
+{
+	// this my code
+	/*sClient Client;
+	string S1;
+
+	char C = 'y';
+	while (tolower(C) == 'y')
+	{
+		Client=ReadNewClient();
+		S1=ConvertRecordToLine(Client);
+		AddDataLineToFile(ClientsFileName, S1);
+
+		cout << "Do you want to add client agian (Y,y) : ";
+		cin >> C;
+		
+
+	}*/
+
+	sClient Clent;
+	char AddMore = 'Y';
+	do
+	{
+		system("cls");
+		cout << "Adding New Client:\n\n";
+		AddNewClient();
+		cout << "\nClient Added Successfully, do you want to add more clients? Y/N? ";
+
+		cin >> AddMore;
+
+
+	} while (toupper(AddMore));
+}
+int main()
+{
+	AddClients();
+	return 0;
+}
+

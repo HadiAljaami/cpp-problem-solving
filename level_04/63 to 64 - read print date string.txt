@@ -1,0 +1,172 @@
+/*Write a program to :
+- read date string.
+- convert it to date structure.
+- print day, mont, year separately.
+- then convert date structure to string and print it on the screen.
+
+Note: write the folowing fuction:
+- stringto date.
+- date to string.
+*/
+
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+vector<string> SplitString(string S1, string Delim)
+{
+    vector<string> vString;
+    short pos = 0;
+    string sWord; // define a string variable  // use find() function to get the position of the delimiters  
+
+    while ((pos = S1.find(Delim)) != std::string::npos)
+    {
+
+        sWord = S1.substr(0, pos); // store the word 
+        if (sWord != "")
+        {
+
+            vString.push_back(sWord);
+        }
+        S1.erase(0, pos + Delim.length());  /* erase() until positon and move to next word. */
+    }
+    if (S1 != "")
+    {
+        vString.push_back(S1); // it adds last word of the string.  
+    }
+    return vString;
+}
+
+
+bool isLeapYear(short Year)
+{
+    return (Year % 4 == 0 && Year % 100 != 0) || (Year % 400 == 0);
+}
+short NumberOfDaysInAMonth(short Month, short Year)
+{
+    if (Month < 1 || Month>12)
+        return  0;
+    int days[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+    return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) : days[Month - 1];
+}
+short NumberOfDaysInYear(short Year)
+{
+    return  isLeapYear(Year) ? 366 : 365;
+}
+struct sDate { short Year; short Month; short Day; };
+short ReadDay()
+{
+    short Day;
+    cout << "\nPlease enter a Day? ";
+    cin >> Day;
+    return Day;
+}
+short ReadMonth()
+{
+    short Month;
+    cout << "\nPlease enter a Month? ";
+    cin >> Month;
+
+    return Month;
+}
+short ReadYear()
+{
+    short Year;
+    cout << "\nPlease enter a Year? ";
+    cin >> Year;
+
+    return Year;
+}
+sDate ReadFullDate()
+{
+    sDate Date;
+    Date.Day = ReadDay();
+    Date.Month = ReadMonth();
+    Date.Year = ReadYear();
+
+    return Date;
+}
+bool ValidateDate(sDate Date)
+{
+    return(Date.Day > 0 && Date.Day <= NumberOfDaysInAMonth(Date.Month, Date.Year)) && (Date.Month > 0 && Date.Month <= 12) && Date.Year > 0;
+}
+bool IsValidDate(sDate Date)
+{
+    if (Date.Day < 1 || Date.Day>31)
+        return false;
+    if (Date.Month < 1 || Date.Month>12)
+        return false; if (Date.Month == 2)
+    {
+        if (isLeapYear(Date.Year))
+        {
+            if (Date.Day > 29)
+                return false;
+        }
+        else
+        {
+            if (Date.Day > 28) return false;
+        }
+    }
+    short DaysInMonth = NumberOfDaysInAMonth(Date.Month, Date.Year);
+    if (Date.Day > DaysInMonth)
+        return false;
+
+    return true;
+}
+
+string DateToString(sDate Date) 
+{
+    return  to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year); 
+} 
+sDate StringToDate(string DateString)
+{
+    sDate Date; vector <string> vDate;  
+    vDate = SplitString(DateString, "/");
+    Date.Day = stoi(vDate[0]);   
+    Date.Month = stoi(vDate[1]); 
+    Date.Year = stoi(vDate[2]);
+    return Date; 
+}
+string ReadStringDate(string Message)
+{
+    string DateString;
+    cout << Message;   
+    getline(cin >> ws, DateString);
+    return DateString; 
+} 
+
+//my function
+string ReadDateString_()
+{
+    string S;
+    sDate Date;
+
+    cout << "Write string Date please like dd/mm/yyyy/ : ";
+    getline(cin, S);
+
+    Date = StringToDate(S);
+    while (!IsValidDate(Date))
+    {
+        cout << "\n Date isn't validate" << endl;
+        cout << "Add right date agian :";
+        getline(cin, S);
+        Date = StringToDate(S);
+    }
+
+    return S;
+}
+int main() 
+{
+    string DateString = ReadStringDate("\nPlease Enter Date dd/mm/yyyy? "); 
+    
+    sDate Date = StringToDate(DateString);  
+    cout << "\nDay:" << Date.Day << endl; 
+    cout << "Month:" << Date.Month << endl;  
+    cout << "Year:" << Date.Year << endl; 
+
+    cout << "\nYou Entered: " << DateToString(Date) << "\n";  
+    
+    system("pause>0");
+    return 0;
+}

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "40-Join string (overloading)", "40-Join string (overloading)\40-Join string (overloading).vcxproj", "{AD127174-CABC-4235-BA26-5C347E711564}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD127174-CABC-4235-BA26-5C347E711564}.Debug|x64.ActiveCfg = Debug|x64
+		{AD127174-CABC-4235-BA26-5C347E711564}.Debug|x64.Build.0 = Debug|x64
+		{AD127174-CABC-4235-BA26-5C347E711564}.Debug|x86.ActiveCfg = Debug|Win32
+		{AD127174-CABC-4235-BA26-5C347E711564}.Debug|x86.Build.0 = Debug|Win32
+		{AD127174-CABC-4235-BA26-5C347E711564}.Release|x64.ActiveCfg = Release|x64
+		{AD127174-CABC-4235-BA26-5C347E711564}.Release|x64.Build.0 = Release|x64
+		{AD127174-CABC-4235-BA26-5C347E711564}.Release|x86.ActiveCfg = Release|Win32
+		{AD127174-CABC-4235-BA26-5C347E711564}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55FB9868-8F57-4415-A02B-A143930AF81A}
+	EndGlobalSection
+EndGlobal
